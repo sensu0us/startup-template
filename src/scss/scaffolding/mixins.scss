@@ -1,0 +1,23 @@
+@mixin breakpoint($interval, $val1, $val2: '') {
+  @if ($interval == 'up') {
+    @media (min-width: $val1) {
+      @content;
+    }
+  } @else if ($interval == 'down') {
+    @media (max-width: $val1 - 0.02px) {
+      @content;
+    }
+  } @else if ($interval == 'between') {
+    @media (min-width: $val1) and (max-width: $val2 - 0.02px) {
+      @content;
+    }
+  }
+}
+
+@mixin retina($name, $ext) {
+  background-image: url('../images/#{$name}@1x.#{$ext}');
+
+  @media (min-resolution: 144dpi) and (min-resolution: 1.5dppx) {
+    background-image: url('../images/#{$name}@2x.#{$ext}');
+  }
+}
